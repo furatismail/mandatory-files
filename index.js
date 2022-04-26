@@ -1,41 +1,23 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import Settings from '../views/Settings.vue'
-import SpecificSettings from '../views/SpecificSettings.vue'
+const express = require('express');
+const app = express();
+const PORT = 3000;
+const server = app.listen(PORT, () => {
+    console.log(`Spusteno na ${PORT}`);
+})
+const socket = require('socket.io');
 
-const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: "/a",
-      redirect: {
-        name: "settings"
-      }
-    },
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: () => import("../views/About.vue"),
-      alias: "/about-us"
-    },
-    {
-      path: '/settings',
-      name: 'settings',
-      component: Settings,
-      children: [
-        {
-          path: ":id",
-          name: "SpecificSettings",
-          component: SpecificSettings 
-        }
-      ]
-    },
-  ]
+// REST API
+app.use(express.static('public'));
+app.get('/api/test', (req, res) => {
+    res.send('Hello worhkkhkhkhkhkhkhkhkhkhkhkhld');
 })
 
-export default router
+// SOCKET
+const io = socket(server);
+io.on('connection', (socket) => {
+    console.log('ID klienta: ',socket.id);
+
+    socket.on("chat", (data) => {
+        io.emit("chat", data)
+    })
+})
