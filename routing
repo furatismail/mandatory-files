@@ -1,0 +1,43 @@
+
+const routes: Routes = [
+  {
+    path: "", pathMatch: "full", redirectTo: "/login"
+  },
+  {
+
+    path: "login",
+    component: BlankComponent,
+    children: [
+      {
+        path: '',
+        component: LoginComponent
+      }
+    ]
+  },
+  {
+    path: "todos",
+    component: PageLayoutComponent,
+    loadChildren: () => import('./views/todos/todos.module')
+      .then(module => module.TodosModule)
+  },
+  {
+    path: "users",
+    component: PageLayoutComponent,
+    loadChildren: () => import('./views/users/users.module')
+      .then(module => module.UsersModule)
+  },
+];
+
+
+
+
+
+<app-layout>
+    <div menu>item1 | item2 | item3</div> 
+    <router-outlet main></router-outlet>
+</app-layout>
+
+
+
+
+<router-outlet></router-outlet>
