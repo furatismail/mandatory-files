@@ -1,1 +1,22 @@
-https://5ed74760152c310016d84d62.mockapi.io/api/films
+<template>
+  <div>
+    <h1>This is an home page</h1>
+    <pre>{{ films }}</pre>
+  </div>
+</template>
+
+<script setup>
+import { reactive } from "vue";
+import FilmService from "../services/FilmService";
+
+const films = reactive({ data: null });
+(async () => {
+  const response = await FilmService.getFilms();
+  films.data = response.data;
+})();
+</script>
+
+<style>
+@media (min-width: 1024px) {
+}
+</style>
