@@ -1,0 +1,27 @@
+<form novalidate (ngSubmit)="submit()" [formGroup]="user">
+    <label *ngIf="false">
+        <span>Name:</span>
+        <input formControlName="name" type="text" placeholder="Your name">
+        <div class="error" *ngIf="(name?.touched || isSubmitted) && name?.hasError('required')">
+            This field is required
+        </div>
+    </label>
+  
+
+    <div formGroupName="account">
+        <label>
+            <span>Email:</span>
+            <input formControlName="email" type="text" placeholder="Your email">
+        </label>
+
+        <label>
+            <span>Confirm:</span>
+            <input formControlName="confirm" type="text" placeholder="Your confirm">
+        </label>
+    </div>
+    <div class="error" *ngIf="account?.hasError('notEqual') && (account?.touched || isSubmitted)">
+        The email and confirm input have to be equal!
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
