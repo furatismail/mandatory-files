@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http'
 import { environment } from 'src/environments/environment';
 import { API_CONFIG } from './api-config.token';
+import { OldComponent } from './old/old.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    OldComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +21,15 @@ import { API_CONFIG } from './api-config.token';
   providers: [
     {
       provide: API_CONFIG,
-      useValue: {apiUrl: environment.apiUrl}
+      useFactory: () => {
+        const userLang = navigator.language;
+        console.log(userLang);
+        if(userLang === 'en') {
+          return {apiUrl: 'http://api1.cz'};
+        } else {
+          return {apiUrl: 'http://api2.cz'};
+        }
+      }
     }
   ],
   bootstrap: [AppComponent]
