@@ -1,27 +1,28 @@
-//instance eventSource
-const evtSource = new EventSource('http://localhost:3000/event');
-const eventList = document.querySelector('ul');
-const button = document.querySelector('button');
+const socket = io.connect("http://localhost:3000", {auth: "sdsajdojo123123ojdad"});
+const message = document.getElementById('message');
+const nickname = document.getElementById('nickname');
+const output = document.getElementById('output');
+const btn = document.getElementById('send');
+const feedback = document.getElementById('feedback');
 
-console.log('readyState: ', evtSource.readyState);
-console.log('url: ', evtSource.url);
+// posilame eventu chat po kliknuti na tlacitko a posilame objekt nickname a message
+btn.addEventListener('click', () => {
+    socket.emit('chat', {
+        message: message.value,
+        nickname: nickname.value
+    })
+})
 
-evtSource.onopen = () => {
-  console.log("Connection to server opened.");
-};
+message.addEventListener('keypress', () => {
+    socket.emit('typing', {
+        nickname: nickname.value
+    })
+})
 
-evtSource.onmessage = (e) => {
-  console.log('message', e)
-  const newElement = document.createElement("li");
-  newElement.textContent = "message: " + e.data;
-  eventList.appendChild(newElement);
-};
+socket.on("chat", (data) => {
+    output.innerHTML += `<p><strong>${data.nickname}</strong>: ${data.message}</p>`
+})
 
-evtSource.onerror = () => {
-  console.log("EventSource failed.");
-};
-
-button.onclick = () => {
-  console.log('Connection closed');
-  evtSource.close();
-};
+socket.on("typing", (data) => {
+    feedback.innerHTML += `<p><strong>${data.nickname}</strong>: <em>pise zpravu ...</em></p>`
+})
