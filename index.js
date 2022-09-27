@@ -5,3 +5,5 @@ const port = 3000;
 app.listen(port, () => {
   console.log("Posloucham na portu 3000");
 });
+
+app.use(express.static("public"));
