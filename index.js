@@ -1,23 +1,28 @@
 const express = require("express");
+const socket = require("socket.io");
+const PORT = 3000;
 const app = express();
-const port = 3000;
-
-app.listen(port, () => {
-  console.log("Posloucham na portu 3000");
+const server = app.listen(PORT, () => {
+  console.log(`Example app listening at http://localhost:${PORT}`);
 });
 
-app.get("/event", (req, res) => {
-  res.setHeader("Content-Type", "text/event-stream");
-  res.setHeader("Cache-Control", "no-cache");
-
-  let count = 0;
-
-  const timer = setInterval(() => {
-    count++;
-    const date = new Date().toLocaleString();
-    // musi byt retezec ktery ma id, event, data \n
-    res.write(`id: ${count}\nevent: message\ndata: ${date}\n\n`);
-  }, 1000);
-});
-
+// SERVING STATIC FILES
 app.use(express.static("public"));
+
+// WEBSOCKET
+const io = socket(server);
+
+io.on("connection", (socket) => {
+  console.log(`Client connected ${socket.id}`);
+
+  socket.on("chat", (data) => {
+    console.log(data);
+    io.emit("chat", data);
+  });
+
+  socket.on("typing", (data) => {
+    socket.broadcast.emit("typing", data);
+  })
+
+  socket.on("disconnect", () => console.log("Client disconnected"));
+});
