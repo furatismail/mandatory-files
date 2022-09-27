@@ -1,17 +1,23 @@
-// funkce umi nacist script z internetu
-function loadScript(src, callback) {
-    // vytvatrim html element script
-    let script = document.createElement('script');
-    // do script nacitam cestu na dany script - www.nekdekdesenachazitenscript.cz
-    script.src = src;
-    // jakmile se nacte tak volam callback
-    script.onload = () => callback(script);
-    // pripojuju element script do hlavicky
-    document.head.append(script);
+function getData(url) {
+  let xhr = new XMLHttpRequest();
+  // budes volat metodu GET a dane url, ktere dostanes
+  xhr.open("GET", url);
+  // to co vratis, mi vratis v JSON
+  xhr.responseType = "json";
+
+  // pokud ti server vrati data tak je vykonzoluj
+  xhr.onload = function () {
+    console.log(xhr.response);
+  };
+
+  // pokud by server spadnul tak vykonzoluj error
+  xhr.onerror = function () {
+    console.log('Nastal error');
+  }
+
+  // zavolej 
+  xhr.send();
 }
 
-loadScript('https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js', script => {
-    alert(`Cool, the script ${script.src} is loaded`);
-  });
 
-  
+getData("https://jsonplaceholder.typicode.com/posts");
