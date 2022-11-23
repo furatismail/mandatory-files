@@ -1,0 +1,25 @@
+import { Injectable } from "@angular/core";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { catchError, map, switchMap, take } from "rxjs";
+import { AuthService } from "src/app/auth.service";
+import * as authActions from './auth.actions'
+
+@Injectable()
+export class AuthEffects {
+
+    constructor(private actions$: Actions, private authService: AuthService) {
+
+    }
+
+    login$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(authActions.login),
+            switchMap((action) =>
+                this.authService.login(action.payload).pipe(
+                    take(1),
+                    map((response: any) => authActions.loginSuccess({ payload: { ...response } }))
+                )
+            )
+        )
+    )
+}
