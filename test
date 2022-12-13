@@ -1,0 +1,5 @@
+ callApi() {
+    this.todosService.getAll().pipe(
+      map(todos => todos.filter((todo: Todo) => todo.id > 5)))
+      .subscribe((response) => console.log(response));
+  }
