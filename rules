@@ -1,0 +1,38 @@
+"rules": {
+        "@nrwl/nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              // {
+              //   "sourceTag": "*",
+              //   "onlyDependOnLibsWithTags": [
+              //     "*"
+              //   ]
+              // },
+              {
+                "sourceTag": "scope:shared",
+                "onlyDependOnLibsWithTags": [
+                  "scope:shared"
+                ]
+              },
+              {
+                "sourceTag": "scope:private",
+                "onlyDependOnLibsWithTags": [
+                  "scope:shared",
+                  "scope:public",
+                  "scope:private"
+                ]
+              },
+              {
+                "sourceTag": "scope:public",
+                "onlyDependOnLibsWithTags": [
+                  "scope:shared",
+                  "scope:public"
+                ]
+              }
+            ]
+          }
+        ]
+      }
