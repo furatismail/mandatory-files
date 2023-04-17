@@ -8,12 +8,16 @@ Vue.createApp({
                 { id: "3", name: "Reklama 3"},
                 
             ],
-            bannerShown: false
+            bannerShown: false,
+            selectedBannerId: ""
         }
     },
     methods: {
         toggle() {
             this.bannerShown = !this.bannerShown;
+        },
+        selectBanner(banner) {
+            this.selectedBannerId = banner.id;
         }
     }
 }).mount('#app1')
