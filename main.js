@@ -17,7 +17,10 @@ Vue.createApp({
             this.bannerShown = !this.bannerShown;
         },
         selectBanner(banner) {
+            console.log('banner co mi prijde: ',banner)
             this.selectedBannerId = banner.id;
+            console.log('banner id: ',this.selectedBannerId)
+
         }
     }
 }).mount('#app1')
