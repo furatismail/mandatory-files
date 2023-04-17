@@ -19,6 +19,10 @@
     .w3-bar-block .w3-bar-item {
         padding: 20px
     }
+
+    .active {
+        background-color: green;
+    }
 </style>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js" defer></script>
 <script src="./main.js" defer></script>
@@ -52,7 +56,10 @@
             </button>
 
             <div v-if="bannerShown">
-                <div v-for="banner in banners" v-on:mouseover="selectBanner(banner)">
+                <div 
+                v-for="banner in banners" 
+                v-on:mouseover="selectBanner(banner)" 
+                v-bind:class="selectedBannerId === banner.id ? 'active' : ''">
                     {{banner.name}}
                 </div>
             </div>
