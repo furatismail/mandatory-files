@@ -52,7 +52,7 @@
             </button>
 
             <div v-if="bannerShown">
-                <div v-for="banner in banners">
+                <div v-for="banner in banners" v-on:mouseover="selectBanner(banner)">
                     {{banner.name}}
                 </div>
             </div>
