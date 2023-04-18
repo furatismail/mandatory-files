@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         Potomek: {{ id }} {{ film }}
-        <button @click="getFilm({id, film})">VYBRAT FILM</button>
+        <button @click="getFilm({id, film, price})">VYBRAT FILM</button>
     </div>
 </template>
 
@@ -12,7 +12,8 @@ defineProps({
     film: {
         type: String,
         required: true
-    }
+    },
+    price: Number
 })
 
 const emits = defineEmits(['addFilm']);
