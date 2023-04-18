@@ -20,16 +20,6 @@ import { reactive, ref } from 'vue';
 const title = ref('Composition API script');
 console.log('Čo je title 1:', title);
 
-let obj = ref({
-    firstName: "Jan",
-    lastName: "Novak"
-})
-
-let obj2 = reactive({
-    firstName: "Jan2",
-    lastName: "Novak2"
-})
-
 function greet() {
   console.log(title)
 }
@@ -41,17 +31,36 @@ function changeTitle() {
   }, 1000)
 }
 
+//////////////////////////////////////////////
+
+let obj = ref({
+    firstName: "Jan",
+    lastName: "Novak"
+})
+
 function changeObj() {
   setTimeout(() => {
     obj.value.firstName = 'Honza'
   }, 1000)
 }
 
+//////////////////////////////////////////////
+
+let obj2 = reactive({
+    firstName: "Jan2",
+    lastName: "Novak2"
+})
+
 function changeObj2() {
   setTimeout(() => {
     obj2.firstName = 'Honza'
   }, 1000)
 }
+
+
+
+
+
 </script>
 
 <style scoped></style>
