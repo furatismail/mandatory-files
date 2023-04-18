@@ -1,6 +1,10 @@
 <template>
     <div>
         {{ title }}
+
+        <button @click="changeTitle()">
+            Změn title
+        </button>
     </div>
 </template>
 
@@ -14,6 +18,11 @@
         methods: {
             greet() {
                 console.log(this.title)
+            },
+            changeTitle() {
+                setTimeout(() => {
+                    this.title = 'Něco jiného';
+                }, 1000);
             }
         }
     }
