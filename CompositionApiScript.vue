@@ -7,7 +7,10 @@
 </template>
 
 <script setup>
-let title = 'Composition API script'
+import { ref } from 'vue';
+
+const title = ref('Composition API script');
+console.log('Čo je title 1:', title);
 
 function greet() {
   console.log(title)
@@ -15,8 +18,8 @@ function greet() {
 
 function changeTitle() {
   setTimeout(() => {
-    title = 'Něco jiného'
-    console.log('Čo je title:', title);
+    title.value = 'Něco jiného'
+    console.log('Čo je title 2:', title);
   }, 1000)
 }
 </script>
