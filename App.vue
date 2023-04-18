@@ -1,6 +1,5 @@
 <script setup>
-import Parent from './components/Parent.vue';
-import Sibling from './components/Sibling.vue';
+
 </script>
 
 <template>
@@ -8,8 +7,7 @@ import Sibling from './components/Sibling.vue';
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <Parent></Parent>  
-      <Sibling></Sibling>
+      <router-view></router-view>
     </div>
 
   </header>
