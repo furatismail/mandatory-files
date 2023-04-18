@@ -1,9 +1,6 @@
 <script setup>
-import CompositionApi from './components/CompositionApi.vue';
-import CompositionApiScript from './components/CompositionApiScript.vue';
-import OptionsApi from './components/OptionsApi.vue';
-
-
+import Parent from './components/Parent.vue';
+import Sibling from './components/Sibling.vue';
 </script>
 
 <template>
@@ -11,12 +8,9 @@ import OptionsApi from './components/OptionsApi.vue';
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <OptionsApi></OptionsApi>
-      ---------------------------------------------------------------
-      <CompositionApi></CompositionApi>
-      ---------------------------------------------------------------
-      <CompositionApiScript></CompositionApiScript>
-      </div>
+      <Parent></Parent>  
+      <Sibling></Sibling>
+    </div>
 
   </header>
 
