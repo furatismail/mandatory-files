@@ -1,6 +1,7 @@
-import axios from 'axios'
+import { HttpClient } from "./HttpClient"
+
 export default {
     getFilms() {
-        return axios.get('https://5ed74760152c310016d84d62.mockapi.io/api/films')
+        return HttpClient.get('/api/films')
     }
 }
