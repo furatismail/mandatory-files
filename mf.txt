@@ -1,0 +1,1 @@
+npx nx generate @nx/angular:setup-mf private-portal --mfType=host --no-interactive 
